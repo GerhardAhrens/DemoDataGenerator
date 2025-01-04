@@ -63,7 +63,7 @@ namespace DemoDataGenerator
             IEnumerable<UserDemoDaten> users = BuildDemoData<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
             foreach (UserDemoDaten user in users)
             {
-                Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper}");
+                Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper};{user.City}");
             }
 
             Console.ReadKey();
@@ -77,7 +77,7 @@ namespace DemoDataGenerator
             foreach (DataRow user in users.Rows)
             {
                 string betrag = string.Format(new CultureInfo("de-de", false), "{0:c2}", user["Betrag"]);
-                Console.WriteLine($"{user["UserName"]};{betrag};{user["IsDeveloper"]}");
+                Console.WriteLine($"{user["UserName"]};{betrag};{user["IsDeveloper"]};{user["City"]}");
             }
 
             Console.ReadKey();
