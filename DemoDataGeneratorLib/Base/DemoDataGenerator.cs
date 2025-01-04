@@ -113,7 +113,7 @@ namespace DemoDataGeneratorLib.Base
             "William","Matthew","James","Landon","Nathan","Dylan","Evan","Luke","Andrew","Gabriel","Gavin","Joshua","Owen","Daniel","Carter","Tyler","Cameron","Christian","Wyatt","Henry","Eli",
             "Joseph","Max","Isaac","Samuel","Anthony","Grayson","Zachary","David","Christopher","John","Isaiah","Levi","Jonathan","Oliver","Chase","Cooper","Tristan","Colton","Austin","Colin",
             "Charlie","Dominic","Parker","Hunter","Thomas","Alex","Ian","Jordan","Cole","Julian","Aaron","Carson","Miles","Blake","Brody","Adam","Sebastian","Adrian","Nolan","Sean","Riley",
-            "Bentley","Xavier","Hayden","Jeremiah","Jason","Jake","Asher","Micah","Jace","Brandon","Josiah","Hudson","Nathaniel","Bryson","Ryder","Justin","Bryce",  null
+            "Bentley","Xavier","Hayden","Jeremiah","Jason","Jake","Asher","Micah","Jace","Brandon","Josiah","Hudson","Nathaniel","Bryson","Ryder","Justin","Bryce"
         };
 
         private static readonly string[] lastNames =
@@ -123,10 +123,10 @@ namespace DemoDataGeneratorLib.Base
             "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers",
             "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres", "Peterson", "Gray", "Ramirez", "James", "Watson", "Brooks",
             "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes", "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell", "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler",
-            "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes", null
+            "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes"
         };
 
-        private static readonly string[] countries = { "Aalen","Mannheim","Ludwigshafen", "Neuhofen","Hamburg","Hannover","Berlin","Bremen","Frankfurt","Dresden","Erfurt","Schwerin","Bremen","Koblenz","Konstanz","Passau","Regensburg","München","Rosenheim" };
+        private static readonly string[] cities = { "Aalen","Mannheim","Ludwigshafen", "Neuhofen","Hamburg","Hannover","Berlin","Bremen","Frankfurt","Dresden","Erfurt","Schwerin","Bremen","Koblenz","Konstanz","Passau","Regensburg","München","Rosenheim" };
 
         private static readonly string[] symbols = 
         { 
@@ -299,9 +299,9 @@ namespace DemoDataGeneratorLib.Base
             return lastNames[rnd.Next(lastNames.Length)];
         }
 
-        public static string Country()
+        public static string City()
         {
-            return countries[rnd.Next(countries.Length)];
+            return cities[rnd.Next(cities.Length)];
         }
 
         public static string ColorName()
@@ -309,6 +309,11 @@ namespace DemoDataGeneratorLib.Base
             List<string> colorNames = ColorInfo.ListOfColorNames().ToList();
 
             return colorNames[rnd.Next(colorNames.Count())];
+        }
+
+        public static string Symbols()
+        {
+            return symbols[rnd.Next(symbols.Length)];
         }
 
         public static (DateTime CreateOn, string CreateBy, DateTime ModifiedOn, string ModifiedBy) SetTimeStamp()

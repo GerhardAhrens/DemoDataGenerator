@@ -8,8 +8,10 @@ Das Tool erstellt für eine Klasse Demodaten für den jeweiligen Typ.
 Demodaten können für viele Zwecke, z.B. zum Test von Control um Daten für die Darstellen anzeigen zu können.
 Demodaten können als Liste oder DataTable erstellt werden.
 
+### Demodaten Generator Einsatzmöglichkeit
+
 #### Beispiel für eine Model-Klasse
-```
+<pre><code class='language-csharp'>
 public class UserDemoDaten
 {
         public string UserName { get; set; }
@@ -20,19 +22,19 @@ public class UserDemoDaten
         public DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
 }
-```
+</code></pre>
 
 #### Die Demodaten werden erstellt und als IEnumerable<T> zurückgeben.
-```
+<pre><code class='language-csharp'>
 IEnumerable<UserDemoDaten> users = DemoDataGenerator<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
 foreach (UserDemoDaten user in users)
 {
    Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper}");
 }
-```
+</code></pre>
 
 #### Konfiguration der Demodaten über eine Callback-Klasse
-```
+<pre><code class='language-csharp'>
 private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 {
     var timeStamp = TestDataGenerator.SetTimeStamp();
@@ -46,5 +48,24 @@ private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 
     return demoDaten;
 }
-```
+</code></pre>
 
+#### Ergebnis
+
+![Demodaten](DomodatenListOfT.png)
+
+### Methoden zum Erstellen von Demodaten
+
+|Methode|Typ|Beschreibung|
+|:------|:--|:-----------|
+|Letters()|string|Erstellen eines String mit Buchstaben|
+|AlphabetAndNumeric()|string|erstellen eines Strings mit Buchstaben und Zahlen|
+|Username()|string|Erstellen eines String im Format xxxx9999|
+|Double()|double|Erstellen einer Double Zahl|
+|Decimal()|decimal|Erstellen einer Decimal Zahl|
+|Integer()|Int|Erstellen einer Int Zahl|
+|Boolean()|bool|Erstellen eines True/False Inhalt|
+|Word()|string|Erstellen eines Strings aus einer Wortliste|
+|City()|string|Erstellen eines string mit einer Stadt|
+|ColorName()|string|Farbname|
+|Symbols()|string|Symbol aus PathGeometry Koordinaten|
