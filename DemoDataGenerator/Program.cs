@@ -89,6 +89,7 @@ namespace DemoDataGenerator
             demoDaten.UserName = BuildDemoData.Username();
             demoDaten.Betrag = BuildDemoData.Currency(1_000, 10_000);
             demoDaten.IsDeveloper = BuildDemoData.Boolean();
+            demoDaten.City = BuildDemoData.City();
             demoDaten.CreateOn = timeStamp.CreateOn;
             demoDaten.CreateBy = timeStamp.CreateBy;
             demoDaten.ModifiedOn = timeStamp.ModifiedOn;
@@ -104,6 +105,7 @@ namespace DemoDataGenerator
         public string UserName { get; set; }
         public bool IsDeveloper { get; set; }
         public decimal Betrag { get; set; }
+        public string City { get; set; }
         public DateTime CreateOn { get; set; }
         public string CreateBy { get; set; }
         public DateTime ModifiedOn { get; set; }

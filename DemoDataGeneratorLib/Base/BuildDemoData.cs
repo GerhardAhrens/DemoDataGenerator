@@ -26,10 +26,13 @@
 namespace DemoDataGeneratorLib.Base
 {
     using System;
+    using System.ComponentModel;
     using System.Data;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
     using System.Windows.Controls;
 
     using DemoDataGeneratorLib.Extension;
@@ -103,6 +106,14 @@ namespace DemoDataGeneratorLib.Base
         }
     }
 
+    public class CityModel
+    {
+        public string area { get; set; }
+        public string name { get; set; }
+        public string state { get; set; }
+        public (string lat, string lon) coords { get; set; }
+    }
+
     public static class BuildDemoData
     {
         private static readonly string[] Consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","ß","t","v","w","x","z"};
@@ -126,7 +137,7 @@ namespace DemoDataGeneratorLib.Base
             "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes"
         };
 
-        private static readonly string[] cities = { "Aalen","Mannheim","Ludwigshafen", "Neuhofen","Hamburg","Hannover","Berlin","Bremen","Frankfurt","Dresden","Erfurt","Schwerin","Bremen","Koblenz","Konstanz","Passau","Regensburg","München","Rosenheim" };
+        private static readonly string[] cities = { "" };
 
         private static readonly string[] symbols = 
         { 
@@ -146,6 +157,21 @@ namespace DemoDataGeneratorLib.Base
 
         static BuildDemoData()
         {
+            var resourceCity = "DemoDataGeneratorLib.Resources.GermanyCities.json";
+
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceCity))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonFileContent = reader.ReadToEnd();
+                        List<CityModel> cityList = JsonSerializer.Deserialize<List<CityModel>>(jsonFileContent);
+                        cities = cityList.Select(s => s.name).ToArray();
+                    }
+                }
+            }
+
             rnd = new Random();
         }
 
