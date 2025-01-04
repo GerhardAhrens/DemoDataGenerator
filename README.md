@@ -11,7 +11,7 @@ Demodaten können als Liste oder DataTable erstellt werden.
 ### Demodaten Generator: Einsatzmöglichkeit
 
 #### Beispiel für eine Model-Klasse
-<pre><code class='language-csharp'>
+```csharp
 public class UserDemoDaten
 {
         public string UserName { get; set; }
@@ -22,7 +22,7 @@ public class UserDemoDaten
         public DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
 }
-</code></pre>
+```
 
 #### Die Demodaten werden erstellt und als IEnumerable<T> zurückgeben.
 <pre><code class='language-csharp'>
