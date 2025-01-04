@@ -25,16 +25,16 @@ public class UserDemoDaten
 ```
 
 #### Die Demodaten werden erstellt und als IEnumerable<T> zurückgeben.
-<pre><code class='language-csharp'>
+```csharp
 IEnumerable<UserDemoDaten> users = DemoDataGenerator<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
 foreach (UserDemoDaten user in users)
 {
    Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper}");
 }
-</code></pre>
+```
 
 #### Konfiguration der Demodaten über eine Callback-Klasse
-<pre><code class='language-csharp'>
+```csharp
 private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 {
     var timeStamp = TestDataGenerator.SetTimeStamp();
@@ -48,7 +48,7 @@ private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 
     return demoDaten;
 }
-</code></pre>
+```
 
 #### Ergebnis
 
