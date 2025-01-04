@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoDataGenerator", "DemoDataGenerator\DemoDataGenerator.csproj", "{B64CEB3E-A4A3-4E61-BD21-C64F6D4B6828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoDataGeneratorLib", "DemoDataGeneratorLib\DemoDataGeneratorLib.csproj", "{06E5B838-4781-4E7B-B053-E2153FCCC6AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B64CEB3E-A4A3-4E61-BD21-C64F6D4B6828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B64CEB3E-A4A3-4E61-BD21-C64F6D4B6828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B64CEB3E-A4A3-4E61-BD21-C64F6D4B6828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B64CEB3E-A4A3-4E61-BD21-C64F6D4B6828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E5B838-4781-4E7B-B053-E2153FCCC6AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E5B838-4781-4E7B-B053-E2153FCCC6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E5B838-4781-4E7B-B053-E2153FCCC6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E5B838-4781-4E7B-B053-E2153FCCC6AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

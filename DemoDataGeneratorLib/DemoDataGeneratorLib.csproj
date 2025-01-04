@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyVersion>1.0.2025.1</AssemblyVersion>
+    <FileVersion>1.0.2025.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\System.Type\" />
+    <Folder Include="Graphics\" />
+  </ItemGroup>
+
+</Project>
