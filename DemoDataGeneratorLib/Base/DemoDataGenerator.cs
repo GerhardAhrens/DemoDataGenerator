@@ -26,7 +26,10 @@
 namespace DemoDataGeneratorLib.Base
 {
     using System;
+    using System.Data;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Windows.Controls;
 
     using DemoDataGeneratorLib.Extension;
@@ -41,7 +44,7 @@ namespace DemoDataGeneratorLib.Base
         public static Func<Tin,Tin> ConfigObject { get; private set; }
 
 
-        public static List<Tin> CreateTestData<Tín>(Func<Tin,Tin> method, int count = 1000)
+        public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
         {
             List<Tin> testDataSource = null;
             Type type = typeof(Tin);
@@ -55,6 +58,44 @@ namespace DemoDataGeneratorLib.Base
                     object obj = (Tin)Activator.CreateInstance(typeof(Tin));
                     result = ConfigObject((Tin)obj);
                     testDataSource.Add((Tin)result);
+                }
+            }
+
+            return testDataSource;
+        }
+
+        public static DataTable CreateForDataTable<Tín>(Func<Tin, Tin> method, int count = 1000)
+        {
+            DataTable testDataSource = null;
+            Type type = typeof(Tin);
+            object result = null;
+            if (method != null)
+            {
+                testDataSource = new DataTable();
+                var properties = type.GetProperties();
+                foreach (PropertyInfo info in properties)
+                {
+                    testDataSource.Columns.Add(new DataColumn(info.Name, Nullable.GetUnderlyingType(info.PropertyType) ?? info.PropertyType));
+                }
+
+                testDataSource.AcceptChanges();
+
+                ConfigObject = method;
+                for (int i = 0; i < count; i++)
+                {
+                    object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                    result = ConfigObject((Tin)obj);
+                    if (result != null)
+                    {
+                        object[] values = new object[properties.Length];
+                        for (int ii = 0; ii < properties.Length; ii++)
+                        {
+                            values[ii] = properties[ii].GetValue(result);
+                        }
+
+                        testDataSource.Rows.Add(values);
+                        testDataSource.AcceptChanges();
+                    }
                 }
             }
 
@@ -162,25 +203,63 @@ namespace DemoDataGeneratorLib.Base
             return result;
         }
 
-        public static TResult Numbers<TResult>(int length) where TResult : new()
+        public static string Username(int lengthLetter = 4, int lengthNumber = 4)
         {
-            const string chars = "0123456789";
+            const string charsLetter = "abcdefghijklmnopqrstuvwxyz";
+            const string charsNumber = "0123456789";
 
-            if (typeof(TResult).IsNumericType() == false)
+
+            if (lengthLetter > charsLetter.Length && lengthNumber > charsNumber.Length)
             {
-                throw new ArgumentException($"Der übergebene Typ muss nummerisch sein. Argument ist '{typeof(TResult).Name}'");
+                return string.Empty;
             }
 
-            if (length > chars.Length)
-            {
-                return (TResult)Convert.ChangeType(0, typeof(TResult), CultureInfo.InvariantCulture);
-            }
+            string resultLetter = new string(Enumerable.Repeat(charsLetter, lengthLetter).Select(s => s[rnd.Next(s.Length)]).ToArray()).ToLower();
+            string resultNumber = new string(Enumerable.Repeat(charsNumber, lengthNumber).Select(s => s[rnd.Next(s.Length)]).ToArray());
 
-            string nums = new string(Enumerable.Repeat(chars, length).Select(s => s[rnd.Next(s.Length)]).ToArray());
-
-            return (TResult)Convert.ChangeType(nums, typeof(TResult), CultureInfo.InvariantCulture);
+            return $"{resultLetter}{resultNumber}";
         }
 
+        public static double Double(double min, double max, int countDigits = 2)
+        {
+            var value = rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, countDigits, MidpointRounding.AwayFromZero);
+        }
+
+        public static decimal Decimal(decimal min, decimal max, int countDigits = 2)
+        {
+            decimal value = (decimal)rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = (decimal)rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, countDigits, MidpointRounding.AwayFromZero);
+        }
+
+        public static decimal Currency(decimal min, decimal max)
+        {
+            decimal value = (decimal)rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = (decimal)rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, 2, MidpointRounding.AwayFromZero);
+        }
+
+        public static int Integer(int min, int max)
+        {
+            return rnd.Next(min, max);
+        }
         public static DateTime Dates(DateTime from, DateTime to)
         {
             TimeSpan range = to - from;
