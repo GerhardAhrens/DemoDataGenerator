@@ -8,7 +8,7 @@ Das Tool erstellt für eine Klasse Demodaten für den jeweiligen Typ.
 Demodaten können für viele Zwecke, z.B. zum Test von Control um Daten für die Darstellen anzeigen zu können.
 Demodaten können als Liste oder DataTable erstellt werden.
 
-### Demodaten Generator Einsatzmöglichkeit
+### Demodaten Generator: Einsatzmöglichkeit
 
 #### Beispiel für eine Model-Klasse
 <pre><code class='language-csharp'>
@@ -69,3 +69,5 @@ private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 |City()|string|Erstellen eines string mit einer Stadt|
 |ColorName()|string|Farbname|
 |Symbols()|string|Symbol aus PathGeometry Koordinaten|
+|SetTimeStamp()|Tuple<>|Timestamp erstellen|
+

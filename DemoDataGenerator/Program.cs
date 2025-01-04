@@ -60,7 +60,7 @@ namespace DemoDataGenerator
         {
             Console.Clear();
 
-            IEnumerable<UserDemoDaten> users = DemoDataGenerator<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
+            IEnumerable<UserDemoDaten> users = BuildDemoData<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
             foreach (UserDemoDaten user in users)
             {
                 Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper}");
@@ -73,7 +73,7 @@ namespace DemoDataGenerator
         {
             Console.Clear();
 
-            DataTable users = DemoDataGenerator<UserDemoDaten>.CreateForDataTable<UserDemoDaten>(ConfigObject, 100);
+            DataTable users = BuildDemoData<UserDemoDaten>.CreateForDataTable<UserDemoDaten>(ConfigObject, 100);
             foreach (DataRow user in users.Rows)
             {
                 string betrag = string.Format(new CultureInfo("de-de", false), "{0:c2}", user["Betrag"]);
@@ -85,10 +85,10 @@ namespace DemoDataGenerator
 
         private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
         {
-            var timeStamp = TestDataGenerator.SetTimeStamp();
-            demoDaten.UserName = TestDataGenerator.Username();
-            demoDaten.Betrag = TestDataGenerator.Currency(1_000, 10_000);
-            demoDaten.IsDeveloper = TestDataGenerator.Boolean();
+            var timeStamp = BuildDemoData.SetTimeStamp();
+            demoDaten.UserName = BuildDemoData.Username();
+            demoDaten.Betrag = BuildDemoData.Currency(1_000, 10_000);
+            demoDaten.IsDeveloper = BuildDemoData.Boolean();
             demoDaten.CreateOn = timeStamp.CreateOn;
             demoDaten.CreateBy = timeStamp.CreateBy;
             demoDaten.ModifiedOn = timeStamp.ModifiedOn;

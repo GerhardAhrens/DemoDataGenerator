@@ -35,9 +35,9 @@ namespace DemoDataGeneratorLib.Base
     using DemoDataGeneratorLib.Extension;
     using DemoDataGeneratorLib.Graphics;
 
-    public static class DemoDataGenerator<Tin>
+    public static class BuildDemoData<Tin>
     {
-        static DemoDataGenerator()
+        static BuildDemoData()
         {
         }
 
@@ -103,7 +103,7 @@ namespace DemoDataGeneratorLib.Base
         }
     }
 
-    public static class TestDataGenerator
+    public static class BuildDemoData
     {
         private static readonly string[] Consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","ß","t","v","w","x","z"};
         private static readonly string[] vokale = { "a", "e", "i", "o", "u" };
@@ -144,7 +144,7 @@ namespace DemoDataGeneratorLib.Base
 
         private static readonly Random rnd;
 
-        static TestDataGenerator()
+        static BuildDemoData()
         {
             rnd = new Random();
         }
