@@ -33,6 +33,7 @@ namespace DemoDataGenerator
                 Console.Clear();
                 Console.WriteLine("1. Demodaten als List<T>");
                 Console.WriteLine("2. Demodaten als DataTable");
+                Console.WriteLine("3. Demodaten als Dictionary<Guid,string>");
                 Console.WriteLine("X. Beenden");
 
                 Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
@@ -50,6 +51,10 @@ namespace DemoDataGenerator
                     else if (key == ConsoleKey.D2)
                     {
                         MenuPoint2();
+                    }
+                    else if (key == ConsoleKey.D3)
+                    {
+                        MenuPoint3();
                     }
                 }
             }
@@ -81,6 +86,25 @@ namespace DemoDataGenerator
             }
 
             Console.ReadKey();
+        }
+
+        private static void MenuPoint3()
+        {
+            Console.Clear();
+
+            Dictionary<object, object> users = BuildDemoData<KeyValuePair<Guid, string>>.CreateForDictionary<KeyValuePair<Guid, string>>(ConfigObjectDict, 100);
+            foreach (KeyValuePair<object,object> user in users)
+            {
+                Console.WriteLine($"{user.Key};{user.Value}");
+            }
+
+            Console.ReadKey();
+        }
+
+        private static KeyValuePair<Guid, string> ConfigObjectDict(KeyValuePair<Guid, string> keyValue)
+        {
+            keyValue = new KeyValuePair<Guid, string>(Guid.NewGuid(), BuildDemoData.Username());
+            return keyValue;
         }
 
         private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)

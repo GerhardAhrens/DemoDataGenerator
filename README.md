@@ -10,6 +10,10 @@ Demodaten können als Liste oder DataTable erstellt werden.
 
 ### Demodaten Generator: Einsatzmöglichkeit
 
+- CreateForList für eine Liste List< T>
+- CreateForDataTable für eine DataTable auf Basis einer Modelklasse
+- CreateForDictionary für ein Dictionary< Tkey, Tvalue> auf Basis eines KeyValuePair<Tkey, Tvalue >
+
 #### Beispiel für eine Model-Klasse
 ```csharp
 public class UserDemoDaten

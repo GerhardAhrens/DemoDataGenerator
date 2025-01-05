@@ -32,6 +32,7 @@ namespace DemoDataGeneratorLib.Base
     using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.AccessControl;
     using System.Text.Json;
     using System.Windows.Controls;
 
@@ -45,7 +46,6 @@ namespace DemoDataGeneratorLib.Base
         }
 
         public static Func<Tin,Tin> ConfigObject { get; private set; }
-
 
         public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
         {
@@ -99,6 +99,30 @@ namespace DemoDataGeneratorLib.Base
                         testDataSource.Rows.Add(values);
                         testDataSource.AcceptChanges();
                     }
+                }
+            }
+
+            return testDataSource;
+        }
+
+        public static Dictionary<object,object> CreateForDictionary<Tín>(Func<Tin, Tin> method, int count = 1000)
+        {
+            Dictionary<object, object> testDataSource = null;
+            Type type = typeof(Tin);
+            object result = null;
+            if (method != null)
+            {
+                Type[] argTypes = type.GetGenericArguments();
+                Type typeKey = argTypes[0];
+                Type typeValue = argTypes[1];
+
+                testDataSource = new Dictionary<object, object>();
+                ConfigObject = method;
+                for (int i = 0; i < count; i++)
+                {
+                    object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                    result = ConfigObject((Tin)obj);
+                    testDataSource.Add(((KeyValuePair<System.Guid, string>)result).Key, ((KeyValuePair<System.Guid, string>)result).Value);
                 }
             }
 
