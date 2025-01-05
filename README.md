@@ -28,12 +28,22 @@ public class UserDemoDaten
 }
 ```
 
+### Die Demodaten werden erstellt und als ein Collection Type zurückgegeben
 #### Die Demodaten werden erstellt und als IEnumerable<T> zurückgeben.
 ```csharp
 IEnumerable<UserDemoDaten> users = DemoDataGenerator<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 100);
 foreach (UserDemoDaten user in users)
 {
    Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper}");
+}
+```
+
+#### Die Demodaten werden erstellt und als Dictionary< Tkey, Tvalue> zurückgeben.
+```csharp
+Dictionary<object, object> users = BuildDemoData<KeyValuePair<int, string>>.CreateForDictionary<KeyValuePair<int, string>>(ConfigObjectInt, 100);
+foreach (KeyValuePair<object, object> user in users)
+{
+    Console.WriteLine($"{user.Key};{user.Value}");
 }
 ```
 

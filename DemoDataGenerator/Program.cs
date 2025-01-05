@@ -34,6 +34,7 @@ namespace DemoDataGenerator
                 Console.WriteLine("1. Demodaten als List<T>");
                 Console.WriteLine("2. Demodaten als DataTable");
                 Console.WriteLine("3. Demodaten als Dictionary<Guid,string>");
+                Console.WriteLine("4. Demodaten als Dictionary<int,string>");
                 Console.WriteLine("X. Beenden");
 
                 Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
@@ -56,6 +57,10 @@ namespace DemoDataGenerator
                     {
                         MenuPoint3();
                     }
+                    else if (key == ConsoleKey.D4)
+                    {
+                        MenuPoint4();
+                    }
                 }
             }
             while (true);
@@ -71,6 +76,8 @@ namespace DemoDataGenerator
                 Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper};{user.City}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("** EinTaste für zurück!");
             Console.ReadKey();
         }
 
@@ -85,6 +92,8 @@ namespace DemoDataGenerator
                 Console.WriteLine($"{user["UserName"]};{betrag};{user["IsDeveloper"]};{user["City"]}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("** EinTaste für zurück!");
             Console.ReadKey();
         }
 
@@ -92,16 +101,39 @@ namespace DemoDataGenerator
         {
             Console.Clear();
 
-            Dictionary<object, object> users = BuildDemoData<KeyValuePair<Guid, string>>.CreateForDictionary<KeyValuePair<Guid, string>>(ConfigObjectDict, 100);
+            Dictionary<object, object> users = BuildDemoData<KeyValuePair<Guid, string>>.CreateForDictionary<KeyValuePair<Guid, string>>(ConfigObjectString, 100);
             foreach (KeyValuePair<object,object> user in users)
             {
                 Console.WriteLine($"{user.Key};{user.Value}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("** EinTaste für zurück!");
             Console.ReadKey();
         }
 
-        private static KeyValuePair<Guid, string> ConfigObjectDict(KeyValuePair<Guid, string> keyValue)
+        private static void MenuPoint4()
+        {
+            Console.Clear();
+
+            Dictionary<object, object> users = BuildDemoData<KeyValuePair<int, string>>.CreateForDictionary<KeyValuePair<int, string>>(ConfigObjectInt, 100);
+            foreach (KeyValuePair<object, object> user in users)
+            {
+                Console.WriteLine($"{user.Key};{user.Value}");
+            }
+
+            Console.ReadKey(); Console.WriteLine();
+            Console.WriteLine("** EinTaste für zurück!");
+
+        }
+
+        private static KeyValuePair<int, string> ConfigObjectInt(KeyValuePair<int, string> keyValue, object counter)
+        {
+            keyValue = new KeyValuePair<int, string>(Convert.ToInt32(counter), BuildDemoData.Username());
+            return keyValue;
+        }
+
+        private static KeyValuePair<Guid, string> ConfigObjectString(KeyValuePair<Guid, string> keyValue, object counter)
         {
             keyValue = new KeyValuePair<Guid, string>(Guid.NewGuid(), BuildDemoData.Username());
             return keyValue;

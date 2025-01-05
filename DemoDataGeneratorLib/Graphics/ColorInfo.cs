@@ -24,7 +24,7 @@ namespace DemoDataGeneratorLib.Graphics
     using System.Windows.Media;
 
     [SupportedOSPlatform("windows")]
-    public sealed class ColorInfo
+    internal sealed class ColorInfo
     {
         public static List<string> ListOfColorNames()
         {

@@ -32,7 +32,7 @@ namespace DemoDataGeneratorLib.Extension
     using System.Runtime.Versioning;
 
     [SupportedOSPlatform("windows")]
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
         private static readonly Dictionary<Type, string> TypeAliases = new Dictionary<Type, string>
         {

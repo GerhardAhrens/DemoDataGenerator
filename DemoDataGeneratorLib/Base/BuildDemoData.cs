@@ -26,17 +26,12 @@
 namespace DemoDataGeneratorLib.Base
 {
     using System;
-    using System.ComponentModel;
     using System.Data;
-    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Security.AccessControl;
     using System.Text.Json;
     using System.Windows.Controls;
 
-    using DemoDataGeneratorLib.Extension;
     using DemoDataGeneratorLib.Graphics;
 
     public static class BuildDemoData<Tin>
@@ -46,6 +41,7 @@ namespace DemoDataGeneratorLib.Base
         }
 
         public static Func<Tin,Tin> ConfigObject { get; private set; }
+        public static Func<Tin,object, Tin> ConfigObjectDict { get; private set; }
 
         public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
         {
@@ -105,11 +101,11 @@ namespace DemoDataGeneratorLib.Base
             return testDataSource;
         }
 
-        public static Dictionary<object,object> CreateForDictionary<Tín>(Func<Tin, Tin> method, int count = 1000)
+        public static Dictionary<object,object> CreateForDictionary<Tín>(Func<Tin,object, Tin> method, int count = 1000)
         {
             Dictionary<object, object> testDataSource = null;
             Type type = typeof(Tin);
-            object result = null;
+            dynamic result = null;
             if (method != null)
             {
                 Type[] argTypes = type.GetGenericArguments();
@@ -117,12 +113,12 @@ namespace DemoDataGeneratorLib.Base
                 Type typeValue = argTypes[1];
 
                 testDataSource = new Dictionary<object, object>();
-                ConfigObject = method;
+                ConfigObjectDict = method;
                 for (int i = 0; i < count; i++)
                 {
-                    object obj = (Tin)Activator.CreateInstance(typeof(Tin));
-                    result = ConfigObject((Tin)obj);
-                    testDataSource.Add(((KeyValuePair<System.Guid, string>)result).Key, ((KeyValuePair<System.Guid, string>)result).Value);
+                    Tin obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                    result = ConfigObjectDict((Tin)obj,i+1);
+                    testDataSource.Add(Convert.ChangeType(result.Key, typeKey), Convert.ChangeType(result.Value, typeValue));
                 }
             }
 
@@ -130,7 +126,7 @@ namespace DemoDataGeneratorLib.Base
         }
     }
 
-    public class CityModel
+    internal class CityModel
     {
         public string area { get; set; }
         public string name { get; set; }
@@ -140,8 +136,6 @@ namespace DemoDataGeneratorLib.Base
 
     public static class BuildDemoData
     {
-        private static readonly string[] Consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","ß","t","v","w","x","z"};
-        private static readonly string[] vokale = { "a", "e", "i", "o", "u" };
         private static readonly string[] firstNames =
         {
             "Aiden","Jackson","Mason","Liam","Jacob","Jayden","Ethan","Noah","Lucas","Logan","Caleb","Caden","Jack","Ryan","Connor","Michael","Elijah","Brayden","Benjamin","Nicholas","Alexander",
