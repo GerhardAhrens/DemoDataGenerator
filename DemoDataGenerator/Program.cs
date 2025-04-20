@@ -14,6 +14,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
@@ -35,6 +36,7 @@ namespace DemoDataGenerator
                 Console.WriteLine("2. Demodaten als DataTable");
                 Console.WriteLine("3. Demodaten als Dictionary<Guid,string>");
                 Console.WriteLine("4. Demodaten als Dictionary<int,string>");
+                Console.WriteLine("5. Demodaten als ICollectionView");
                 Console.WriteLine("X. Beenden");
 
                 Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
@@ -60,6 +62,10 @@ namespace DemoDataGenerator
                     else if (key == ConsoleKey.D4)
                     {
                         MenuPoint4();
+                    }
+                    else if (key == ConsoleKey.D5)
+                    {
+                        MenuPoint5();
                     }
                 }
             }
@@ -124,7 +130,20 @@ namespace DemoDataGenerator
 
             Console.ReadKey(); Console.WriteLine();
             Console.WriteLine("** EinTaste für zurück!");
+        }
 
+        private static void MenuPoint5()
+        {
+            Console.Clear();
+
+            ICollectionView users = BuildDemoData<UserDemoDaten>.CreateForICollectionView<UserDemoDaten>(ConfigObject, 100);
+            foreach (UserDemoDaten user in users)
+            {
+                Console.WriteLine($"{user.UserName};{user.Betrag.ToString("C2")};{user.IsDeveloper};{user.City}");
+            }
+
+            Console.ReadKey(); Console.WriteLine();
+            Console.WriteLine("** EinTaste für zurück!");
         }
 
         private static KeyValuePair<int, string> ConfigObjectInt(KeyValuePair<int, string> keyValue, object counter)

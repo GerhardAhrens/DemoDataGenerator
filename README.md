@@ -2,7 +2,9 @@
 # Demo Daten Generator
 
 [![NET Framework](https://img.shields.io/badge/NET%20Core-%208.0-red.svg)](#)
-[![Version](https://img.shields.io/badge/Version-%201.0.2025.1-blue.svg)](#)
+[![Version](https://img.shields.io/badge/Version-%201.0.2025.10-blue.svg)](#)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![VS2022](https://img.shields.io/badge/Visual%20Studio-2022-white.svg)
 
 Das Tool erstellt für eine Klasse Demodaten für den jeweiligen Typ.
 Demodaten können für viele Zwecke, z.B. zum Test von Control um Daten für die Darstellen anzeigen zu können.
@@ -11,6 +13,7 @@ Demodaten können als Liste oder DataTable erstellt werden.
 ### Demodaten Generator: Einsatzmöglichkeit
 
 - CreateForList für eine Liste List< T>
+- CreateForICollectionView für ein ICollectionView
 - CreateForDataTable für eine DataTable auf Basis einer Modelklasse
 - CreateForDictionary für ein Dictionary< Tkey, Tvalue> auf Basis eines KeyValuePair<Tkey, Tvalue >
 
@@ -85,3 +88,14 @@ private static UserDemoDaten ConfigObject(UserDemoDaten demoDaten)
 |Symbols()|string|Symbol aus PathGeometry Koordinaten|
 |SetTimeStamp()|Tuple<>|Timestamp erstellen|
 
+# History
+
+![Version](https://img.shields.io/badge/Version-1.0.2025.10-blue.svg)
+![Stand](https://img.shields.io/badge/Datum-20.04.2025.0-geen.svg)
+
+- Demodaten für den Typ ICollectionView hinzugefügt
+
+![Version](https://img.shields.io/badge/Version-1.0.2025.1-blue.svg)
+![Stand](https://img.shields.io/badge/Datum-02.01.2025.0-geen.svg)
+
+- Erste Version des Demodatengenerator

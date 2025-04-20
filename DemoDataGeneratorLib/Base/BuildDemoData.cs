@@ -26,11 +26,13 @@
 namespace DemoDataGeneratorLib.Base
 {
     using System;
+    using System.ComponentModel;
     using System.Data;
     using System.IO;
     using System.Reflection;
     using System.Text.Json;
     using System.Windows.Controls;
+    using System.Windows.Data;
 
     using DemoDataGeneratorLib.Graphics;
 
@@ -42,6 +44,35 @@ namespace DemoDataGeneratorLib.Base
 
         public static Func<Tin,Tin> ConfigObject { get; private set; }
         public static Func<Tin,object, Tin> ConfigObjectDict { get; private set; }
+
+        public static ICollectionView CreateForICollectionView<Tín>(Func<Tin, Tin> method, int count = 1000)
+        {
+            List<Tin> testDataSource = null;
+            Type type = typeof(Tin);
+            object result = null;
+            if (method != null)
+            {
+                testDataSource = new List<Tin>();
+                ConfigObject = method;
+                for (int i = 0; i < count; i++)
+                {
+                    if (typeof(Tin) == typeof(string))
+                    {
+                        object obj = null;
+                        result = ConfigObject((Tin)obj);
+                        testDataSource.Add((Tin)result);
+                    }
+                    else
+                    {
+                        object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                        result = ConfigObject((Tin)obj);
+                        testDataSource.Add((Tin)result);
+                    }
+                }
+            }
+
+            return CollectionViewSource.GetDefaultView(testDataSource);
+        }
 
         public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
         {

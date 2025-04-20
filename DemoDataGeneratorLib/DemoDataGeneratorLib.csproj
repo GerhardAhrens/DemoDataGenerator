@@ -5,8 +5,10 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.2025.1</AssemblyVersion>
-    <FileVersion>1.0.2025.1</FileVersion>
+    <AssemblyVersion>1.0.2025.10</AssemblyVersion>
+    <FileVersion>1.0.2025.10</FileVersion>
+    <Title>Demodaten Generator</Title>
+    <Description>Die Library erstellt für verschiedene Datentypen Demodaten</Description>
   </PropertyGroup>
 
   <ItemGroup>
